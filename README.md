@@ -1,4 +1,4 @@
-# psx-serial-number
+# PSX Serial Number
 This library extracts the serial from PSX bin files. The serials are normalized to use always `_` to separate string from numeric part of the serial and `.` for the last two digits of the numeric part. fe: `SLUS_015.52`
 
 ## How to use it
