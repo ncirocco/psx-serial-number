@@ -43,7 +43,6 @@ func GetSerial(filepath string) (serial string, err error) {
 
 		serial = findSerial(string(buffer[:bytesread]))
 		if serial != "" {
-			fmt.Println(serial)
 			serial = normalizeSerial(serial)
 			break
 		}
