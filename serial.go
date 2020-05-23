@@ -1,7 +1,7 @@
 package psxserialnumber
 
 import (
-	"fmt"
+	"errors"
 	"io"
 	"os"
 	"regexp"
@@ -12,6 +12,9 @@ const serialRegex string = "((SLPS|SLES|SLUS|SCPS|SCUS|SCES|SIPS|SLPM|SLEH|SLED|
 const serialCodeDotPosition int = 8
 const serialCodeLength int = 11
 const bufferSize int = 1024 * 1024
+
+// ErrSerialNotFound returned when the serial can not be found
+var ErrSerialNotFound = errors.New("Serial not found")
 
 var serialExceptions = map[string]string{
 	"SLUSP":  "SLUS_",
@@ -49,10 +52,10 @@ func GetSerial(filepath string) (serial string, err error) {
 	}
 
 	if serial == "" {
-		return serial, fmt.Errorf("No serial found for the file %s", filepath)
+		err = ErrSerialNotFound
 	}
 
-	return serial, nil
+	return serial, err
 }
 
 func findSerial(s string) string {
